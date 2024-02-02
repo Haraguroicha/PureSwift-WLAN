@@ -12,6 +12,8 @@ import Foundation
  Encapsulates an IEEE 802.11 network. 
  */
 public struct WLANNetwork: Equatable, Hashable {
+
+    private var id: UUID = UUID()
     
     /// The service set identifier (SSID) for the network, returned as data.
     ///
@@ -20,11 +22,24 @@ public struct WLANNetwork: Equatable, Hashable {
     
     /// The basic service set identifier (BSSID) for the network. 
     public let bssid: BSSID
+
+    /// The raw data of the network information data
+    public let raw: Any
     
     public init(ssid: SSID,
-                bssid: BSSID) {
+                bssid: BSSID,
+                raw: Any) {
         
         self.ssid = ssid
         self.bssid = bssid
+        self.raw = raw
+    }
+
+    public static func ==(lhs: WLANNetwork, rhs: WLANNetwork) -> Bool {
+        return lhs.id == rhs.id
+    }
+
+    public func hash(into hasher: inout Hasher) {
+        return hasher.combine(id)
     }
 }

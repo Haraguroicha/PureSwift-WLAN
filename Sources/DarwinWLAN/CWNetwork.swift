@@ -29,7 +29,7 @@ internal extension WLANNetwork {
             bssid = .zero // dont have permissions
         }
         
-        self.init(ssid: ssid, bssid: bssid)
+        self.init(ssid: ssid, bssid: bssid, raw: coreWLAN)
     }
 }
 

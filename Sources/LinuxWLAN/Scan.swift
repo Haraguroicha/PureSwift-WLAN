@@ -121,6 +121,6 @@ internal extension WLANNetwork {
         let ssidLength = min(Int(scanResult.bss.informationElements[1]), 32)
         let ssid = SSID(data: scanResult.bss.informationElements[2 ..< 2 + ssidLength]) ?? ""
         let bssid = BSSID(bigEndian: BSSID(bytes: scanResult.bss.bssid.bytes))
-        self.init(ssid: ssid, bssid: bssid)
+        self.init(ssid: ssid, bssid: bssid, raw: scanResult)
     }
 }
