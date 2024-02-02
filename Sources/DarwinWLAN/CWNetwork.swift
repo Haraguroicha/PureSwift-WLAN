@@ -15,9 +15,12 @@ internal extension WLANNetwork {
     
     init(_ coreWLAN: CWNetwork) {
         
-        guard let ssidData = coreWLAN.ssidData,
-            let ssid = SSID(data: ssidData)
-            else { fatalError("Invalid values") }
+        let ssid: SSID
+        if let ssidData = coreWLAN.ssidData {
+            ssid = SSID(data: ssidData)!
+        } else {
+            ssid = SSID(string: "<Hidden Network>")! // hidden SSID
+        }
         
         let bssid: BSSID
         if let bssidString = coreWLAN.bssid {
